@@ -12,16 +12,14 @@ class DCPMessage:
     timestamp: float = field(default_factory=time.time)
     meta: Dict[str,Any] = field(default_factory=dict)
     trace_id: Optional[str] = None
-    hops: int = 0   # 跳数，便于拓扑调度追踪
+    hops: int = 0   
 
     def __repr__(self):
         return f"<Msg {self.src}->{self.dst} @ {self.timestamp:.2f}: {self.payload}>"
 
 class DCPChannel:
-    """
-    工业级可靠通信通道(可单机/多机/网络/消息队列扩展)。
-    默认实现为内存SimpleQueue，生产环境可适配ZeroMQ/RedisMQ/RabbitMQ等。
-    """
+    
+    
     def __init__(self, worker_id: int, num_workers: int):
         self.worker_id = worker_id
         self.num_workers = num_workers
